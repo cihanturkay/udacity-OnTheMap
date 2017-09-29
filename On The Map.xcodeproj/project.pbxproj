@@ -54,14 +54,46 @@
 		0E39610D1F7E91FA0005B477 /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				0E3961231F7E942A0005B477 /* Controller */,
+				0E3961221F7E94090005B477 /* Assets */,
+				0E3961211F7E94090005B477 /* View */,
+				0E3961201F7E93F30005B477 /* Model */,
 				0E39610E1F7E91FA0005B477 /* AppDelegate.swift */,
-				0E3961101F7E91FA0005B477 /* ViewController.swift */,
+			);
+			path = "On The Map";
+			sourceTree = "<group>";
+		};
+		0E3961201F7E93F30005B477 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0E3961211F7E94090005B477 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0E3961221F7E94090005B477 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0E39611A1F7E91FA0005B477 /* Info.plist */,
 				0E3961121F7E91FA0005B477 /* Main.storyboard */,
 				0E3961151F7E91FA0005B477 /* Assets.xcassets */,
 				0E3961171F7E91FA0005B477 /* LaunchScreen.storyboard */,
-				0E39611A1F7E91FA0005B477 /* Info.plist */,
 			);
-			path = "On The Map";
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		0E3961231F7E942A0005B477 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0E3961101F7E91FA0005B477 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UM5725RK95;
 				INFOPLIST_FILE = "On The Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.cihan.On-The-Map";
@@ -289,6 +322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UM5725RK95;
 				INFOPLIST_FILE = "On The Map/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.cihan.On-The-Map";
