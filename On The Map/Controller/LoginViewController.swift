@@ -37,13 +37,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: Any) {
-        setUIEnabled(enabled: false)
-        UdacityClient.sharedInstance().postSession(userName: emailField.text!, password: passwordField.text!) { (session, error) in
-            if let error = error {
-                print(error)
-            } else if let session = session {
-                print(session)
+        if(isEmailAndPasswordPresented()){
+            setUIEnabled(enabled: false)
+            UdacityClient.sharedInstance().postSession(userName: emailField.text!, password: passwordField.text!) { (session, error) in
+                if let error = error {
+                    print(error)
+                } else if let session = session {
+                    print(session)
+                }
+                self.setUIEnabled(enabled: true)
             }
+        } else {
+            print("email or/and password are empty")
         }
     }
     
@@ -51,23 +56,28 @@ class LoginViewController: UIViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func isEmailAndPasswordPresented() -> Bool {
+        if let email = emailField.text, email.count > 3, let password = passwordField.text, password.count > 3 {
+            return true
+        } else {
+            return false
+        }
     }
     
     private func setUIEnabled(enabled:Bool){
-        if(enabled) {
-            activityIndicator.stopAnimating()
-            loginButton.alpha = 1
-        } else {
-            activityIndicator.startAnimating()
-            loginButton.alpha = 0
+        DispatchQueue.main.async {
+            if(enabled) {
+                self.activityIndicator.stopAnimating()
+                self.loginButton.alpha = 1
+            } else {
+                self.activityIndicator.startAnimating()
+                self.loginButton.alpha = 0
+            }
+            self.loginButton.isEnabled = enabled
+            self.signUpButton.isEnabled = enabled
+            self.emailField.isEnabled = enabled
+            self.passwordField.isEnabled = enabled
         }
-        loginButton.isEnabled = enabled
-        signUpButton.isEnabled = enabled
-        emailField.isEnabled = enabled
-        passwordField.isEnabled = enabled
     }
     
 }
