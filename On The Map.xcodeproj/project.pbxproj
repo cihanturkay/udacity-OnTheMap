@@ -74,7 +74,6 @@
 			children = (
 				0E3961301F8242F60005B477 /* Main */,
 				0E39612F1F8242E80005B477 /* Controller */,
-				0E3961221F7E94090005B477 /* Assets */,
 				0E3961211F7E94090005B477 /* View */,
 				0E3961201F7E93F30005B477 /* Model */,
 				0E39610E1F7E91FA0005B477 /* AppDelegate.swift */,
@@ -97,14 +96,6 @@
 				0E3961331F827C590005B477 /* CustomActivityIndicator.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		0E3961221F7E94090005B477 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				0E3961171F7E91FA0005B477 /* LaunchScreen.storyboard */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		0E3961261F7E966D0005B477 /* Clients */ = {
@@ -148,6 +139,7 @@
 		0E3961301F8242F60005B477 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				0E3961171F7E91FA0005B477 /* LaunchScreen.storyboard */,
 				0E3961151F7E91FA0005B477 /* Assets.xcassets */,
 				0E3961121F7E91FA0005B477 /* Main.storyboard */,
 				0E39611A1F7E91FA0005B477 /* Info.plist */,
