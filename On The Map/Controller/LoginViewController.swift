@@ -17,6 +17,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     @IBAction func login(_ sender: Any) {
         hideError()
         if(isEmailAndPasswordPresented()){

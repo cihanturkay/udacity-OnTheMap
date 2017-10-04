@@ -33,6 +33,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell") as UITableViewCell!
         let name = [student.firstName, student.lastName].flatMap{$0}.joined(separator: " ")
         cell?.textLabel!.text = name
+        print(name)
         cell?.detailTextLabel?.text = student.mediaUrl
         return cell!
     }
