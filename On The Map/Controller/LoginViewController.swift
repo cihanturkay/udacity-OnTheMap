@@ -17,28 +17,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        emailField.text = "cihan@zigzag.is"
-        passwordField.text = "Pass1234"
-        // Do any additional setup after loading the view, typically from a nib.
-        ParseClient.sharedInstance().getStudentLocations { ( studentLocations , error) in
-            if let error = error {
-                print(error)
-            } else if let locations = studentLocations {
-                //print(locations)
-                if let key = locations[0].uniqueKey {
-                    ParseClient.sharedInstance().getStudentLocation(_uniqueKey: key, { (location, error) in
-                        if let location = location {
-                            print(location)
-                        }
-                    })
-                }
-            }
-        }
-    }
-    
     @IBAction func login(_ sender: Any) {
         hideError()
         if(isEmailAndPasswordPresented()){
