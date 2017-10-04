@@ -20,7 +20,6 @@ class StudentLocation: NSObject, MKAnnotation {
     var longitude:Double?
     var createdAt:String?
     var updatedAt:String?
-    var mapLocation:CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     init(dictionary: [String:AnyObject]) {
         objectID = dictionary[ParseClient.StudentLocationKeys.ObjectID] as! String
@@ -33,9 +32,7 @@ class StudentLocation: NSObject, MKAnnotation {
         longitude = dictionary[ParseClient.StudentLocationKeys.Longitude] as? Double
         createdAt = dictionary[ParseClient.StudentLocationKeys.CreatedAt] as? String
         updatedAt = dictionary[ParseClient.StudentLocationKeys.UpdatedAt] as? String
-        if let lat = self.latitude, let long = self.longitude{
-            mapLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        }
+      
     }
     
     static func locationsFromResult(_ results: [[String:AnyObject]]) -> [StudentLocation] {
@@ -50,10 +47,22 @@ class StudentLocation: NSObject, MKAnnotation {
     }
     
     var coordinate: CLLocationCoordinate2D {
-        return mapLocation
+        guard let lat = self.latitude, let long = self.longitude else {
+            return CLLocationCoordinate2D()
+        }
+        return  CLLocationCoordinate2D(latitude: lat, longitude: long)
     }
     
     
+    var title :String? {
+        let name = [firstName, lastName].flatMap{$0}.joined(separator: " ")
+        return name
+    }
+    
+    
+    var subtitle: String? {
+        return mediaUrl
+    }
     
 }
 

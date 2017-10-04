@@ -46,6 +46,14 @@ class BaseTabController: UIViewController {
         loadLocations()
     }
     
+    func openURL(mediaUrl:String?) {
+        if let mediaUrl = mediaUrl, let url = URL(string: mediaUrl) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
     func hideError(){
         errorMessage.isHidden = true
     }

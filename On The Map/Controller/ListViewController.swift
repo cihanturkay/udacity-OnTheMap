@@ -44,11 +44,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = self.studentLocations[(indexPath as NSIndexPath).row]
-        if let mediaUrl = student.mediaUrl, let url = URL(string: mediaUrl) {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
+        openURL(mediaUrl: student.mediaUrl)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     

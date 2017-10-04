@@ -21,6 +21,8 @@ class MapViewController: BaseTabController, MKMapViewDelegate {
     }
 
     override func onStudentLocationsLoaded(_ locations: [StudentLocation]) {
+        mapView.removeAnnotations(studentLocations)
+        super.onStudentLocationsLoaded(locations)
         mapView.addAnnotations(studentLocations)
     }
     
@@ -29,18 +31,25 @@ class MapViewController: BaseTabController, MKMapViewDelegate {
             let identifier = "pin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                as? MKPinAnnotationView { // 2
+                as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-                // 3
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
             }
             return view
         }
         return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(calloutTapped))
+        view.addGestureRecognizer(gesture)
+    }
+    
+    @objc func calloutTapped(sender:UITapGestureRecognizer) {
+        guard let annotation = (sender.view as? MKAnnotationView)?.annotation as? StudentLocation else { return }
+        openURL(mediaUrl: annotation.mediaUrl)
     }
 }
