@@ -30,14 +30,20 @@ class ParseClient: BaseClient {
         let _ = runRequest(request as URLRequest, ClientType.PARSE) { (results, error) in
             if let error = error {
                 print(error)
-                completionHandler(nil, error)
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
             } else {
                 if let result = results?[ParseClient.ResponseKeys.Result] as? [[String:AnyObject]] {
                     let locations = StudentLocation.locationsFromResult(result)
-                    completionHandler(locations, nil)
+                    DispatchQueue.main.async {
+                        completionHandler(locations, nil)
+                    }
                 } else {
                     print("Couldn't parse locations")
-                    completionHandler(nil, NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations"]))
+                    DispatchQueue.main.async {
+                        completionHandler(nil, NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations"]))
+                    }
                 }
             }
         }
@@ -54,18 +60,24 @@ class ParseClient: BaseClient {
         let _ = runRequest(request as URLRequest, ClientType.PARSE) { (results, error) in
             if let error = error {
                 print(error)
-                completionHandler(nil, error)
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
             } else {
                 if let result = results?[ParseClient.ResponseKeys.Result] as? [[String:AnyObject]] {
                     let locations = StudentLocation.locationsFromResult(result)
-                    if(locations.count > 0) {
-                         completionHandler(locations[0], nil)
-                    } else {
-                         completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocation"]))
+                    DispatchQueue.main.async {
+                        if(locations.count > 0) {
+                            completionHandler(locations[0], nil)
+                        } else {
+                            completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocation"]))
+                        }
                     }
                 } else {
                     print("Couldn't parse locations")
-                    completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocation"]))
+                    DispatchQueue.main.async {
+                        completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocation"]))
+                    }
                 }
             }
         }

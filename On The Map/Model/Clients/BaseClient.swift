@@ -25,24 +25,24 @@ class BaseClient: NSObject {
         /* Make the request */
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
-            func sendError(_ error: String) {
+            func sendError(_ error: String,_ code:Int) {
                 print(error)
                 let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandler(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+                completionHandler(nil, NSError(domain: "taskForGETMethod", code: code, userInfo: userInfo))
             }
             
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
+                sendError(error!.localizedDescription, 0)
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
+                sendError("Your request returned a status code other than 2xx!", 1)
                 return
             }
             
             guard let data = data else {
-                sendError("No data was returned by the request!")
+                sendError("No data was returned by the request!", 1)
                 return
             }
             

@@ -9,8 +9,10 @@
 import Foundation
 
 class UdacityClient: BaseClient {
-
+    
     static let SESSION_URL = "https://www.udacity.com/api/session"
+    
+    var udacitySession:UdacitySession?
     
     override init() {
         super.init()
@@ -26,14 +28,20 @@ class UdacityClient: BaseClient {
         let _ = runRequest(request as URLRequest, ClientType.UDACITY) { (results, error) in
             if let error = error {
                 print(error)
-                completionHandler(nil, error)
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
             } else {
                 if let parsedSession = results?[UdacityClient.ResponseKeys.Session] as? [String:AnyObject] {
-                    let session = UdacitySession.init(dictionary: parsedSession)
-                    completionHandler(session,nil)
+                    self.udacitySession = UdacitySession.init(dictionary: parsedSession)
+                    DispatchQueue.main.async {
+                        completionHandler(self.udacitySession,nil)
+                    }
                 } else {
                     let userInfo = [NSLocalizedDescriptionKey : "Couldn't retrieve session for the user: '\(userName)'"]
-                    completionHandler(nil, NSError(domain: "getSession", code: 1, userInfo: userInfo))
+                    DispatchQueue.main.async {
+                        completionHandler(nil, NSError(domain: "getSession", code: 1, userInfo: userInfo))
+                    }
                 }
             }
         }

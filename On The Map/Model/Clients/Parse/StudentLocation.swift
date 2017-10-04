@@ -5,8 +5,10 @@
 //  Created by Cihan Turkay on 02.10.17.
 //  Copyright © 2017 Cihan Turkay. All rights reserved.
 //
+import Foundation
+import MapKit
 
-struct StudentLocation {
+class StudentLocation: NSObject, MKAnnotation {
     
     var objectID:String
     var uniqueKey:String?
@@ -18,6 +20,7 @@ struct StudentLocation {
     var longitude:Double?
     var createdAt:String?
     var updatedAt:String?
+    var mapLocation:CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     init(dictionary: [String:AnyObject]) {
         objectID = dictionary[ParseClient.StudentLocationKeys.ObjectID] as! String
@@ -30,6 +33,9 @@ struct StudentLocation {
         longitude = dictionary[ParseClient.StudentLocationKeys.Longitude] as? Double
         createdAt = dictionary[ParseClient.StudentLocationKeys.CreatedAt] as? String
         updatedAt = dictionary[ParseClient.StudentLocationKeys.UpdatedAt] as? String
+        if let lat = self.latitude, let long = self.longitude{
+            mapLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        }
     }
     
     static func locationsFromResult(_ results: [[String:AnyObject]]) -> [StudentLocation] {
@@ -43,4 +49,11 @@ struct StudentLocation {
         return locations
     }
     
+    var coordinate: CLLocationCoordinate2D {
+        return mapLocation
+    }
+    
+    
+    
 }
+
