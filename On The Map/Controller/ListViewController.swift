@@ -20,8 +20,7 @@ class ListViewController: BaseTabController {
     }
     
     override func onStudentLocationsLoaded(_ locations: [StudentLocation]) {
-        super.onStudentLocationsLoaded(locations)
-        print(locations.count)
+        super.onStudentLocationsLoaded(locations)       
         tableView.reloadData()
     }
 }
@@ -29,21 +28,20 @@ class ListViewController: BaseTabController {
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let student = self.studentLocations[(indexPath as NSIndexPath).row]
+        let student = self.locationBarController.studentLocations[(indexPath as NSIndexPath).row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell") as UITableViewCell!
         let name = [student.firstName, student.lastName].flatMap{$0}.joined(separator: " ")
         cell?.textLabel!.text = name
-        print(name)
         cell?.detailTextLabel?.text = student.mediaUrl
         return cell!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.studentLocations.count
+        return self.locationBarController.studentLocations.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let student = self.studentLocations[(indexPath as NSIndexPath).row]
+        let student = self.locationBarController.studentLocations[(indexPath as NSIndexPath).row]
         openURL(mediaUrl: student.mediaUrl)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }

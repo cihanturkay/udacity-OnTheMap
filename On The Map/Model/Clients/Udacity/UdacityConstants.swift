@@ -40,9 +40,15 @@ extension UdacityClient {
         static let key = "key"
     }
     
+    struct User {
+        static let firstName = "first_name"
+        static let lastName = "last_name"
+    }
+    
     struct ResponseKeys {
         static let Session = "session"
         static let Account = "account"
+        static let User = "user"
     }
 }
 

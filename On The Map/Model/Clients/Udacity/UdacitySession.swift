@@ -6,8 +6,6 @@
 //  Copyright © 2017 Cihan Turkay. All rights reserved.
 //
 
-import Foundation
-
 struct UdacitySession {
     
     var id:String

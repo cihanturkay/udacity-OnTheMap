@@ -42,7 +42,7 @@ class ParseClient: BaseClient {
                 } else {
                     print("Couldn't parse locations")
                     DispatchQueue.main.async {
-                        completionHandler(nil, NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations"]))
+                        completionHandler(nil, NSError(domain: "getStudentLocations parsing", code: BaseClient.ERROR_GENERAL, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations"]))
                     }
                 }
             }
@@ -53,7 +53,7 @@ class ParseClient: BaseClient {
     func getStudentLocation(_uniqueKey:String, _ completionHandler: @escaping (_ studentLocations: StudentLocation?, _ error: NSError?) -> Void) {
         
         var parameters = [String:AnyObject]()
-        //predefined specifications
+
         parameters[ParseClient.ParameterKeys.Where] = "{\"uniqueKey\":\"\(_uniqueKey)\"}" as AnyObject
         let request = authenticateRequest(NSMutableURLRequest(url: urlFromParameters(parameters, withPathExtension: Methods.StudentLocation)))
         
@@ -70,18 +70,70 @@ class ParseClient: BaseClient {
                         if(locations.count > 0) {
                             completionHandler(locations[0], nil)
                         } else {
-                            completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocation"]))
+                            completionHandler(nil, nil)
                         }
                     }
                 } else {
                     print("Couldn't parse locations")
                     DispatchQueue.main.async {
-                        completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocation"]))
+                        completionHandler(nil, NSError(domain: "getStudentLocation parsing", code: BaseClient.ERROR_GENERAL, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocation"]))
                     }
                 }
             }
         }
     }
+    
+    
+    func postStudentLocation(mapString:String, url:String, long:Double, lat:Double, completionHandler: @escaping (_ error: NSError?) -> Void) {
+        let parameters = [String:AnyObject]()
+        let request = authenticateRequest(NSMutableURLRequest(url: urlFromParameters(parameters, withPathExtension: Methods.StudentLocation)))
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let firstName = UdacityClient.sharedInstance().currentUser?.firstName ?? ""
+        let lastName = UdacityClient.sharedInstance().currentUser?.lastName ?? ""
+        let uniqueKey = UdacityClient.sharedInstance().udacityAccount?.key ?? ""
+        let body = "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(url)\", \"latitude\": \(lat), \"longitude\": \(long)}".data(using: String.Encoding.utf8)
+        request.httpBody = body
+        
+        let _ = runRequest(request as URLRequest, ClientType.PARSE) { (results, error) in
+            if let error = error {
+                print(error)
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
+            } else {
+                DispatchQueue.main.async {
+                     completionHandler(nil)
+                }
+            }
+        }
+    }
+    
+    func updateStudentLocation(objectID:String,mapString:String, url:String, long:Double, lat:Double, completionHandler: @escaping (_ error: NSError?) -> Void) {
+        let parameters = [String:AnyObject]()
+        let request = authenticateRequest(NSMutableURLRequest(url: urlFromParameters(parameters, withPathExtension: Methods.StudentLocation + "/\(objectID)")))
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let firstName = UdacityClient.sharedInstance().currentUser?.firstName ?? ""
+        let lastName = UdacityClient.sharedInstance().currentUser?.lastName ?? ""
+        let uniqueKey = UdacityClient.sharedInstance().udacityAccount?.key ?? ""
+        let body = "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(url)\", \"latitude\": \(lat), \"longitude\": \(long)}".data(using: String.Encoding.utf8)
+        request.httpBody = body
+        
+        let _ = runRequest(request as URLRequest, ClientType.PARSE) { (results, error) in
+            if let error = error {
+                print(error)
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
     
     //MARK: HELPERS
     

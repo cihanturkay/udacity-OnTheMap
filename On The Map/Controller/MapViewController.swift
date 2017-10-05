@@ -13,30 +13,32 @@ class MapViewController: BaseTabController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    let annotationIdentifier = "annotationIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        mapView.addAnnotations(studentLocations)
+        mapView.addAnnotations(self.locationBarController.studentLocations)
     }
-
+    
     override func onStudentLocationsLoaded(_ locations: [StudentLocation]) {
-        mapView.removeAnnotations(studentLocations)
+        //remove old pins
+        mapView.removeAnnotations(self.locationBarController.studentLocations)
         super.onStudentLocationsLoaded(locations)
-        mapView.addAnnotations(studentLocations)
+        mapView.addAnnotations(locations)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? StudentLocation {
-            let identifier = "pin"
             var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
                 as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
                 view.canShowCallout = true
+                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             }
             return view
         }

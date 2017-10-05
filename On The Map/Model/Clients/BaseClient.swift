@@ -10,6 +10,9 @@ import Foundation
 
 class BaseClient: NSObject {
     
+    static let ERROR_GENERAL:Int = 1// Mostly :: Failed to connect server due to unknown error
+    static let ERROR_SPECIFIC:Int = 0 // This will be shown to user
+    
     enum ClientType {
         case UDACITY
         case PARSE
@@ -32,17 +35,17 @@ class BaseClient: NSObject {
             }
             
             guard (error == nil) else {
-                sendError(error!.localizedDescription, 0)
+                sendError(error!.localizedDescription, BaseClient.ERROR_SPECIFIC)
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!", 1)
+                sendError("Your request returned a status code other than 2xx!", BaseClient.ERROR_GENERAL)
                 return
             }
             
             guard let data = data else {
-                sendError("No data was returned by the request!", 1)
+                sendError("No data was returned by the request!", BaseClient.ERROR_GENERAL)
                 return
             }
             
@@ -76,7 +79,7 @@ class BaseClient: NSObject {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
         } catch {
             let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
-            completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))
+            completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: BaseClient.ERROR_GENERAL, userInfo: userInfo))
         }
         
         completionHandlerForConvertData(parsedResult, nil)

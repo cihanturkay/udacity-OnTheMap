@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aYm-gb-oxD">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Pin-->
+        <scene sceneID="Tcv-vd-Iz8">
+            <objects>
+                <viewController id="Kvx-kq-kcG" userLabel="Add Pin" customClass="AddLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qfF-ae-wK0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="euP-VJ-uPR">
+                                <rect key="frame" x="161.5" y="97" width="52" height="67"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nyp-iV-Cqw" userLabel="Login Container">
+                                <rect key="frame" x="37.5" y="188" width="300" height="228"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check your credentials and try again." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xy-Ou-Aeb" userLabel="Error Message">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="lr2-82-2mS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="1" green="0.32378510329999999" blue="0.57957741159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJm-fZ-sVo">
+                                        <rect key="frame" x="0.0" y="60" width="300" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="B9Z-gv-99l"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Website" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IPZ-eG-Xs6">
+                                        <rect key="frame" x="0.0" y="120" width="300" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="9xd-lp-Qsv"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spo-gY-osx" customClass="StyledButton" customModule="On_The_Map" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="180" width="300" height="48"/>
+                                        <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="sR6-w8-3hi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="FIND LOCATION">
+                                            <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="findLocation:" destination="Kvx-kq-kcG" eventType="touchUpInside" id="EQq-kE-xOp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="TrF-FE-cvS"/>
+                                </constraints>
+                            </stackView>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-ja-tx9" userLabel="Activity Indicator" customClass="CustomActivityIndicator" customModule="On_The_Map" customModuleProvider="target">
+                                <rect key="frame" x="163.5" y="368" width="48" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="FMW-qg-A54"/>
+                                    <constraint firstAttribute="height" constant="48" id="JAA-8d-YCN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nyp-iV-Cqw" firstAttribute="top" secondItem="euP-VJ-uPR" secondAttribute="bottom" constant="24" id="1zt-Cv-HAy"/>
+                            <constraint firstItem="euP-VJ-uPR" firstAttribute="bottom" secondItem="P88-us-nud" secondAttribute="top" constant="100" id="7bi-8s-CfO"/>
+                            <constraint firstItem="yJa-ja-tx9" firstAttribute="centerX" secondItem="spo-gY-osx" secondAttribute="centerX" id="LDL-qD-QBL"/>
+                            <constraint firstItem="nyp-iV-Cqw" firstAttribute="centerX" secondItem="P88-us-nud" secondAttribute="centerX" id="XE4-gJ-YyO"/>
+                            <constraint firstItem="euP-VJ-uPR" firstAttribute="centerX" secondItem="P88-us-nud" secondAttribute="centerX" id="kW4-Hl-K6J"/>
+                            <constraint firstItem="yJa-ja-tx9" firstAttribute="centerY" secondItem="spo-gY-osx" secondAttribute="centerY" id="p5D-cz-fEx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="P88-us-nud"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Location" id="gP6-Co-51t">
+                        <barButtonItem key="leftBarButtonItem" title="CANCEL" style="done" id="QLL-HW-MaC">
+                            <connections>
+                                <action selector="dismis:" destination="Kvx-kq-kcG" id="8ZB-gf-51y"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="yJa-ja-tx9" id="cAL-PX-t7d"/>
+                        <outlet property="errorMessage" destination="9xy-Ou-Aeb" id="HBn-p9-ESA"/>
+                        <outlet property="findLocation" destination="spo-gY-osx" id="8Si-I0-bgC"/>
+                        <outlet property="locationField" destination="mJm-fZ-sVo" id="VH3-gm-w0T"/>
+                        <outlet property="webSiteField" destination="IPZ-eG-Xs6" id="7ce-O1-UoI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rLX-MX-hCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1167.2" y="-157.87106446776613"/>
+        </scene>
+        <!--Confirm Location-->
+        <scene sceneID="gh0-wl-xnz">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmLocationViewController" id="wWi-4B-gSe" userLabel="Confirm Location" customClass="ConfirmLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XaI-Ir-R1h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Xl3-YZ-3bs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Failed to update location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-HR-WD6" userLabel="Error Message">
+                                        <rect key="frame" x="0.0" y="-20" width="375" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="48" id="5b5-Dc-5iQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="1" green="0.32378510329999999" blue="0.57957741159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8Dn-hx-Ozo">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    </mapView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RK-9N-T5M" customClass="StyledButton" customModule="On_The_Map" customModuleProvider="target">
+                                <rect key="frame" x="37" y="599" width="300" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="sOX-Wl-ONP"/>
+                                    <constraint firstAttribute="width" constant="300" id="tXg-vs-nnS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="FINISH">
+                                    <color key="titleColor" red="0.99991279840000002" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="finish:" destination="wWi-4B-gSe" eventType="touchUpInside" id="u3p-0r-2ue"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRc-nJ-PAA" userLabel="Overlay">
+                                <rect key="frame" x="-0.5" y="10" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.011599777918781751" green="0.011599777918781751" blue="0.011599777918781751" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AiD-EQ-gQH" userLabel="Activity Indicator" customClass="CustomActivityIndicator" customModule="On_The_Map" customModuleProvider="target">
+                                <rect key="frame" x="163" y="319.5" width="48" height="48"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="8Xr-If-hP7"/>
+                                    <constraint firstAttribute="width" constant="48" id="Wqm-UM-hSe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xl3-YZ-3bs" firstAttribute="trailing" secondItem="5tf-LP-z2r" secondAttribute="trailing" id="3GK-ZX-eFF"/>
+                            <constraint firstItem="yRc-nJ-PAA" firstAttribute="width" secondItem="XaI-Ir-R1h" secondAttribute="width" id="ImY-94-laH"/>
+                            <constraint firstItem="6RK-9N-T5M" firstAttribute="centerX" secondItem="5tf-LP-z2r" secondAttribute="centerX" id="Lhh-hg-EbC"/>
+                            <constraint firstItem="yRc-nJ-PAA" firstAttribute="centerX" secondItem="5tf-LP-z2r" secondAttribute="centerX" id="O1c-dN-6dn"/>
+                            <constraint firstItem="yRc-nJ-PAA" firstAttribute="height" secondItem="XaI-Ir-R1h" secondAttribute="height" id="WYg-7U-CFu"/>
+                            <constraint firstItem="AiD-EQ-gQH" firstAttribute="centerY" secondItem="5tf-LP-z2r" secondAttribute="centerY" id="X8l-T5-LC4"/>
+                            <constraint firstItem="AiD-EQ-gQH" firstAttribute="centerX" secondItem="5tf-LP-z2r" secondAttribute="centerX" id="YMg-Xu-q11"/>
+                            <constraint firstItem="6RK-9N-T5M" firstAttribute="top" secondItem="5tf-LP-z2r" secondAttribute="bottom" constant="-68" id="a7h-6b-LLb"/>
+                            <constraint firstItem="yRc-nJ-PAA" firstAttribute="centerY" secondItem="5tf-LP-z2r" secondAttribute="centerY" id="gaK-vO-Sjw"/>
+                            <constraint firstAttribute="bottom" secondItem="Xl3-YZ-3bs" secondAttribute="bottom" id="rbI-BL-JRs"/>
+                            <constraint firstItem="Xl3-YZ-3bs" firstAttribute="leading" secondItem="5tf-LP-z2r" secondAttribute="leading" id="ubp-tg-AuM"/>
+                            <constraint firstItem="Xl3-YZ-3bs" firstAttribute="top" secondItem="5tf-LP-z2r" secondAttribute="top" id="xL8-L8-SFH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5tf-LP-z2r"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Confirm" id="hYJ-Rh-emF">
+                        <barButtonItem key="backBarButtonItem" title=" " id="hIg-8L-tKR"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="AiD-EQ-gQH" id="oVN-rA-nME"/>
+                        <outlet property="errorMessage" destination="Ck9-HR-WD6" id="DYe-sS-ti1"/>
+                        <outlet property="mapView" destination="8Dn-hx-Ozo" id="sky-7h-ca0"/>
+                        <outlet property="overlay" destination="yRc-nJ-PAA" id="bDr-ik-VHZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h5a-kj-xzV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1901.5999999999999" y="-159.67016491754123"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qi8-71-T4O">
+            <objects>
+                <navigationController storyboardIdentifier="AddLocationController" automaticallyAdjustsScrollViewInsets="NO" id="aYm-gb-oxD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2xx-V1-X80">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Kvx-kq-kcG" kind="relationship" relationship="rootViewController" id="X0N-hE-oL3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gkV-LE-mYP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="391" y="-158"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_world" width="52" height="67"/>
+    </resources>
+</document>

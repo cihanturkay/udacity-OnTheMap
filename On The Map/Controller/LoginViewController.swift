@@ -45,15 +45,10 @@ class LoginViewController: UIViewController {
     
     func showError(_ error:NSError){
         var errorText:String?
-        switch error.code {
-        case 0:
-            errorText = error.localizedDescription
-        case 1:
-            errorText = "Wrong email or password"
-        case 2:
-            errorText = error.localizedDescription
-        default:
-            errorText = "Failed to login. Try again."
+        if (error.code == BaseClient.ERROR_GENERAL) {
+             errorText = "Wrong email or password"
+        } else {
+             errorText = error.localizedDescription
         }
         errorMessage.text = errorText
         errorMessage.alpha = 1
