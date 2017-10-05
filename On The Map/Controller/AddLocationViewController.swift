@@ -76,7 +76,7 @@ class AddLocationViewController: UIViewController {
             } else {
                 self.hideProgress()
                 let alert = UIAlertController(title: "Error", message: "Couldn't find a location for \(address)", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
         }
