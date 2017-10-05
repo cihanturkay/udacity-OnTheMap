@@ -75,8 +75,9 @@ class AddLocationViewController: UIViewController {
                 self.hideProgress()
             } else {
                 self.hideProgress()
-                let userInfo = [NSLocalizedDescriptionKey:"Couldn't find a location for \(address)"]
-                self.showError(NSError(domain: "addLocation", code: BaseClient.ERROR_SPECIFIC, userInfo: userInfo))
+                let alert = UIAlertController(title: "Error", message: "Couldn't find a location for \(address)", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
