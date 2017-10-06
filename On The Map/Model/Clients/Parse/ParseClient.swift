@@ -11,13 +11,6 @@ import Foundation
 
 class ParseClient: BaseClient {
     
-    let studentNotification = NSNotification(name: Notification.Name("StudentNotification"), object: nil)
-    var studentLocations:[StudentLocation] = [] {
-        didSet{
-           NotificationCenter.default.post(name: Notification.Name("StudentNotification"), object: nil)
-        }
-    }
-    
     override init() {
         super.init()
     }
@@ -42,9 +35,9 @@ class ParseClient: BaseClient {
                 }
             } else {
                 if let result = results?[ParseClient.ResponseKeys.Result] as? [[String:AnyObject]] {
-                    self.studentLocations = StudentLocation.locationsFromResult(result)
+                    StudentLocationsModel.sharedInstance.studentLocations = StudentLocation.locationsFromResult(result)
                     DispatchQueue.main.async {
-                        completionHandler(self.studentLocations, nil)
+                        completionHandler(StudentLocationsModel.sharedInstance.studentLocations, nil)
                     }
                 } else {
                     print("Couldn't parse locations")

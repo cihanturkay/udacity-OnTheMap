@@ -26,7 +26,7 @@ class MapViewController: BaseTabController, MKMapViewDelegate {
                 //remove old pins
                 self.mapView.removeAnnotations(self.mapView.annotations)
                 //add new pins
-                self.mapView.addAnnotations(ParseClient.sharedInstance().studentLocations)
+                self.mapView.addAnnotations(StudentLocationsModel.sharedInstance.studentLocations)
             }
         }
     }

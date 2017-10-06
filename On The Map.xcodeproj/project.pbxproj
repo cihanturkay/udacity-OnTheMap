@@ -29,6 +29,7 @@
 		0E9D87EC1F86338000E7F198 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D87EB1F86338000E7F198 /* AddLocationViewController.swift */; };
 		0E9D87EE1F86415800E7F198 /* AddPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E9D87ED1F86415800E7F198 /* AddPin.storyboard */; };
 		0E9D87F21F86656A00E7F198 /* ConfirmLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9D87F11F86656A00E7F198 /* ConfirmLocationViewController.swift */; };
+		0EEBCB071F87A5C400C671A5 /* StudentLocationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEBCB061F87A5C400C671A5 /* StudentLocationsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		0E9D87EB1F86338000E7F198 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		0E9D87ED1F86415800E7F198 /* AddPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddPin.storyboard; sourceTree = "<group>"; };
 		0E9D87F11F86656A00E7F198 /* ConfirmLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLocationViewController.swift; sourceTree = "<group>"; };
+		0EEBCB061F87A5C400C671A5 /* StudentLocationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				0E3961261F7E966D0005B477 /* Clients */,
+				0EEBCB061F87A5C400C671A5 /* StudentLocationsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				0E7828E71F84EFA60009E2A0 /* BaseTabViewController.swift in Sources */,
 				0E3961341F827C590005B477 /* CustomActivityIndicator.swift in Sources */,
 				0E7828E51F84ED7F0009E2A0 /* ListViewController.swift in Sources */,
+				0EEBCB071F87A5C400C671A5 /* StudentLocationsModel.swift in Sources */,
 				0E7828EB1F8616D80009E2A0 /* UdacityUser.swift in Sources */,
 				0E3961381F828A350005B477 /* UdacityClient.swift in Sources */,
 			);

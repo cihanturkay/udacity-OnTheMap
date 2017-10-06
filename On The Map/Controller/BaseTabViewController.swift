@@ -36,7 +36,7 @@ class BaseTabController: UIViewController {
         parent?.navigationItem.rightBarButtonItems = rightButtonItmes
         parent?.navigationController?.view.backgroundColor = UIColor.white
         
-        if ParseClient.sharedInstance().studentLocations.count == 0 {
+        if StudentLocationsModel.sharedInstance.studentLocations.count == 0 {
             loadLocations()
         } else {
              onStudentLocationsLoaded()

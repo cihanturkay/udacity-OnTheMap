@@ -31,7 +31,7 @@ class ListViewController: BaseTabController {
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let student = ParseClient.sharedInstance().studentLocations[(indexPath as NSIndexPath).row]
+        let student = StudentLocationsModel.sharedInstance.studentLocations[(indexPath as NSIndexPath).row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell") as UITableViewCell!
         let name = [student.firstName, student.lastName].flatMap{$0}.joined(separator: " ")
         cell?.textLabel!.text = name
@@ -40,11 +40,11 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().studentLocations.count
+        return StudentLocationsModel.sharedInstance.studentLocations.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let student = ParseClient.sharedInstance().studentLocations[(indexPath as NSIndexPath).row]
+        let student = StudentLocationsModel.sharedInstance.studentLocations[(indexPath as NSIndexPath).row]
         openURL(mediaUrl: student.mediaUrl)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
