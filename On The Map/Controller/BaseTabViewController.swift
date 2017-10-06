@@ -11,30 +11,26 @@ import UIKit
 
 class BaseTabController: UIViewController {
     
-    @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var activityIndicator: CustomActivityIndicator!
     @IBOutlet weak var overlay: UIView!
     
-    var locationBarController: LocationTabBarController!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.locationBarController = tabBarController as! LocationTabBarController
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         parent?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOGOUT", style: .done, target: self, action: #selector(logout))
         let rightButtonItmes:[UIBarButtonItem] = [UIBarButtonItem(image: #imageLiteral(resourceName: "icon_addpin"), style: .plain, target: self, action: #selector(addPin)),
                                                   UIBarButtonItem(image: #imageLiteral(resourceName: "icon_refresh"), style: .plain, target: self, action: #selector(refresh))]
         parent?.navigationItem.rightBarButtonItems = rightButtonItmes
         parent?.navigationController?.view.backgroundColor = UIColor.white
         
-        if self.locationBarController.studentLocations.count == 0 {
+        if ParseClient.sharedInstance().studentLocations.count == 0 {
             loadLocations()
-        }        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        } else {
+             onStudentLocationsLoaded()
+        }
     }
     
     @objc func logout(){
@@ -117,36 +113,29 @@ class BaseTabController: UIViewController {
             if let error = error {
                 print(error)
                 self.showError(error)
-            } else if let locations = studentLocations {
-                //print(locations)
-                self.onStudentLocationsLoaded(locations)
+            } else if let _ = studentLocations {
+                self.onStudentLocationsLoaded()
             }
             self.hideProgress()
         }
     }
     
-    func onStudentLocationsLoaded(_ locations:[StudentLocation]){
-        self.locationBarController.studentLocations = locations
+    func onStudentLocationsLoaded(){
+       //Implement in paret to update ui
     }
     
     private func showError(_ error:NSError){
-        var errorText:String?
+        var errorText:String = ""
         if(error.code == BaseClient.ERROR_SPECIFIC){
             errorText = error.localizedDescription
         } else {
             errorText = "Couldn't load data. Try again."
         }
-        print("error \(String(describing: errorText))")
-        errorMessage.text = errorText
-        errorMessage.isHidden = false
+        alert(message: errorText)
+        hideProgress()
     }
     
-    func hideError(){
-        errorMessage.isHidden = true
-    }
-    
-    func showProgress(){
-        hideError()
+    func showProgress(){       
         activityIndicator.startAnimating()
         setUIEnabled(false)
     }

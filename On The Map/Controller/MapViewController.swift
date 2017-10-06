@@ -17,15 +17,14 @@ class MapViewController: BaseTabController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
-        mapView.addAnnotations(self.locationBarController.studentLocations)
+        mapView.delegate = self        
     }
     
-    override func onStudentLocationsLoaded(_ locations: [StudentLocation]) {
+    override func onStudentLocationsLoaded() {
         //remove old pins
-        mapView.removeAnnotations(self.locationBarController.studentLocations)
-        super.onStudentLocationsLoaded(locations)
-        mapView.addAnnotations(locations)
+        mapView.removeAnnotations(mapView.annotations)
+        //add new pins
+        mapView.addAnnotations(ParseClient.sharedInstance().studentLocations)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

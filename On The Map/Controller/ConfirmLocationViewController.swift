@@ -78,18 +78,14 @@ class ConfirmLocationViewController: UIViewController, MKMapViewDelegate {
     }
     
     func showError(_ error:NSError){
-        var errorText:String?
+        var errorText:String = ""
         if (error.code == BaseClient.ERROR_GENERAL) {
             errorText = "Failed to update location. Try again"
         } else {
             errorText = error.localizedDescription
         }
-        errorMessage.text = errorText
-        errorMessage.alpha = 1
-    }
-    
-    func hideError(){
-        errorMessage.alpha = 0
+        alert(message: errorText)
+        setUIEnabled(enabled: true)
     }
     
     private func setUIEnabled(enabled:Bool){

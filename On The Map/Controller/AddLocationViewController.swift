@@ -18,13 +18,21 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var webSiteField: UITextField!
     @IBOutlet weak var activityIndicator: CustomActivityIndicator!
-    @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var findLocation: StyledButton!
     
     var studentLocation:StudentLocation?
     
     @IBAction func dismis(_ sender: Any) {
         navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let studentLocation = studentLocation {
+            //set if user already registered a value
+            locationField.text = studentLocation.mapString
+            webSiteField.text = studentLocation.mediaUrl
+        }
     }
     
     @IBAction func findLocation(_ sender: Any) {
@@ -73,35 +81,34 @@ class AddLocationViewController: UIViewController {
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
                 self.hideProgress()
-            } else {
+            } else if let error = error as! CLError? {
                 self.hideProgress()
-                let alert = UIAlertController(title: "Error", message: "Couldn't find a location for \(address)", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                print("error gecoding \(error)")
+                if error.code.rawValue == CLError.network.rawValue {
+                    //no internet connection
+                    let userInfo = [NSLocalizedDescriptionKey : "The Internet connection appears to be offline"]
+                    self.showError(NSError(domain: "location", code: BaseClient.ERROR_SPECIFIC, userInfo: userInfo))
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey : "Couldn't find location for \(address)"]
+                    self.showError(NSError(domain: "location", code: BaseClient.ERROR_SPECIFIC, userInfo: userInfo))
+                }
+               
             }
         }
     }
     
     private func showError(_ error:NSError){
-        var errorText:String?
-        
+        var errorText:String = ""
         if(error.code == BaseClient.ERROR_SPECIFIC){
             errorText = error.localizedDescription
         } else {
             errorText = "Couldn't load data. Try again."
         }
-        
-        print("error \(String(describing: errorText))")
-        errorMessage.text = errorText
-        errorMessage.alpha = 1
-    }
-    
-    func hideError(){
-        errorMessage.alpha = 0
+        alert(message: errorText)
+        hideProgress()
     }
     
     func showProgress(){
-        hideError()
         activityIndicator.startAnimating()
         setUIEnabled(enabled: false)
     }

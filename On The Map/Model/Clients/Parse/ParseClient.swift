@@ -11,6 +11,8 @@ import Foundation
 
 class ParseClient: BaseClient {
     
+    var studentLocations:[StudentLocation] = []
+    
     override init() {
         super.init()
     }
@@ -35,9 +37,9 @@ class ParseClient: BaseClient {
                 }
             } else {
                 if let result = results?[ParseClient.ResponseKeys.Result] as? [[String:AnyObject]] {
-                    let locations = StudentLocation.locationsFromResult(result)
+                    self.studentLocations = StudentLocation.locationsFromResult(result)
                     DispatchQueue.main.async {
-                        completionHandler(locations, nil)
+                        completionHandler(self.studentLocations, nil)
                     }
                 } else {
                     print("Couldn't parse locations")

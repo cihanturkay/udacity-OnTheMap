@@ -10,19 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var activityIndicator: CustomActivityIndicator!
     @IBOutlet weak var loginButton: StyledButton!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     @IBAction func login(_ sender: Any) {
-        hideError()
         if(isEmailAndPasswordPresented()){
             setUIEnabled(enabled: false)
             UdacityClient.sharedInstance().postSession(userName: emailField.text!, password: passwordField.text!) { (session, error) in
@@ -44,18 +38,14 @@ class LoginViewController: UIViewController {
     }
     
     func showError(_ error:NSError){
-        var errorText:String?
+        var errorText:String = ""
         if (error.code == BaseClient.ERROR_GENERAL) {
              errorText = "Wrong email or password"
         } else {
              errorText = error.localizedDescription
         }
-        errorMessage.text = errorText
-        errorMessage.alpha = 1
-    }
-    
-    func hideError(){
-        errorMessage.alpha = 0
+        alert(message: errorText)
+        setUIEnabled(enabled: true)
     }
     
     @IBAction func signup(_ sender: Any) {
@@ -88,5 +78,15 @@ class LoginViewController: UIViewController {
         self.passwordField.isEnabled = enabled
     }
     
+}
+
+extension UIViewController {
+    
+    func alert(message: String, title: String = "") {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
