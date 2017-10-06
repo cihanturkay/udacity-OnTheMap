@@ -61,7 +61,7 @@ class ConfirmLocationViewController: UIViewController, MKMapViewDelegate {
                     if let error = error {
                         self.showError(error)
                     }else {
-                        self.navigationController?.dismiss(animated: true, completion: nil)
+                       self.onSuccess()
                     }
                 })
             } else {
@@ -70,10 +70,17 @@ class ConfirmLocationViewController: UIViewController, MKMapViewDelegate {
                     if let error = error {
                         self.showError(error)
                     }else {
-                        self.navigationController?.dismiss(animated: true, completion: nil)
+                       self.onSuccess()
                     }
                 })
             }
+        }
+    }
+    
+    private func onSuccess(){
+        self.navigationController?.dismiss(animated: true, completion: nil)
+        ParseClient.sharedInstance().getStudentLocations { (locations, error) in
+            //Nothing to do this will trigger updating data
         }
     }
     

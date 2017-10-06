@@ -20,7 +20,11 @@ class ListViewController: BaseTabController {
     }
     
     override func onStudentLocationsLoaded() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            if(self.tableView != nil){
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 

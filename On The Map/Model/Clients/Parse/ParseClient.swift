@@ -11,7 +11,12 @@ import Foundation
 
 class ParseClient: BaseClient {
     
-    var studentLocations:[StudentLocation] = []
+    let studentNotification = NSNotification(name: Notification.Name("StudentNotification"), object: nil)
+    var studentLocations:[StudentLocation] = [] {
+        didSet{
+           NotificationCenter.default.post(name: Notification.Name("StudentNotification"), object: nil)
+        }
+    }
     
     override init() {
         super.init()

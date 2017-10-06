@@ -14,6 +14,16 @@ class BaseTabController: UIViewController {
     @IBOutlet weak var activityIndicator: CustomActivityIndicator!
     @IBOutlet weak var overlay: UIView!
     
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        NotificationCenter.default.addObserver(self, selector: #selector(onStudentLocationsLoaded), name:  Notification.Name("StudentNotification"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("StudentNotification"), object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -114,13 +124,13 @@ class BaseTabController: UIViewController {
                 print(error)
                 self.showError(error)
             } else if let _ = studentLocations {
-                self.onStudentLocationsLoaded()
+                //use notifications ot listen updates
             }
             self.hideProgress()
         }
     }
     
-    func onStudentLocationsLoaded(){
+    @objc func onStudentLocationsLoaded(){
        //Implement in paret to update ui
     }
     
